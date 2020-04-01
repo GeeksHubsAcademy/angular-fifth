@@ -1,0 +1,21 @@
+<header>
+  <ul nz-menu nzMode="horizontal">
+    <li nz-menu-item routerLink="">
+      Home
+    </li>
+
+    <li nz-menu-item routerLink="profile" *ngIf="userService.user['username'] as username">
+      {{username}}
+    </li>
+    <li nz-menu-item (click)="logout()" *ngIf="userService.user['id']">
+      Log out
+    </li>
+
+    <li nz-menu-item routerLink="login" *ngIf="!userService.user['id']">
+      Login
+    </li>
+    <li nz-menu-item routerLink="register" *ngIf="!userService.user['id']">
+      Register
+    </li>
+  </ul>
+</header>

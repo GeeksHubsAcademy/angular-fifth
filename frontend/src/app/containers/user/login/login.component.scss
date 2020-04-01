@@ -1,0 +1,19 @@
+.loginContainer{
+    display: flex;
+    min-height: 70vh;
+    padding: 0.5em;
+    justify-content: center;
+    align-items: center;
+}
+.login-form {
+    max-width: 300px;
+  }
+  
+  .login-form-forgot {
+    float: right;
+  }
+  
+  .login-form-button {
+    width: 100%;
+  }
+  
