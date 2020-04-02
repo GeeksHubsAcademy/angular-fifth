@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       const user = this.validateForm.value;
       this.userService.login(user)
       .subscribe(
-        (res:HttpResponse<object>) =>{
+        (res:HttpResponse<any>) =>{
           localStorage.setItem('authToken',res['token']);
           this.userService.setUser(res['user']);
           // this.notification.create(

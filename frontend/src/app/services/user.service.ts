@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  public user: object = {};
+  private user: object = {};
   constructor(public httpClient: HttpClient) { }
 
   register(user: object): Observable<any> {
@@ -18,6 +18,9 @@ export class UserService {
   }
   setUser(user: object): void {
     this.user = user;
+  }
+  getUser(): object {
+    return this.user;
   }
   getUserInfo(token: string): Observable<any> {
     return this.httpClient.get('http://localhost:3000/users/info', {

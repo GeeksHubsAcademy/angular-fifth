@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const { User, Token } = require('../models/index');
+const { User, Token,Sequelize } = require('../models/index');
+const { Op } = Sequelize;
 const env = process.env.NODE_ENV || 'development';
 const {  jwt_secret } = require('../config/config.json')[env];
 const authentication = async (req, res, next) => {
@@ -9,7 +10,11 @@ const authentication = async (req, res, next) => {
         const user = await User.findByPk(payload.id); //buscamos el usuario en la base de datos con el id del payload
         const tokenFound = await Token.findOne({
             where:{
-                token:token
+                [Op.and]:[{
+                    token:token,
+                },{
+                    UserId:payload.id
+                }] 
             }
         })
         if(!user || !tokenFound){
