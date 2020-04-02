@@ -7,10 +7,9 @@
         <option value="JPY">JP Yen ¥</option>
         <option value="RUB">Rubblo Ruso Br</option>
     </select>
-    <div class="product" *ngFor="let product of (products$ | async)">
-        <h3>{{product.name }}</h3>
-        <img src="{{product.image_path}}" alt="imagen">
-        <h5>Price: {{product.price * ((exchangeRates$ |async)['rates'][currency] || 1) | currency:currency}}</h5>
-        {{product.createdAt | date:'dd/MM/yyyy'}}
-    </div>
+    <app-product [product]="product" 
+    rate="{{(exchangeRates$ |async)?.rates[currency] || 1}}"
+    [currency]="currency"
+     *ngFor="let product of (products$ | async)"></app-product>
+    
 </div>
