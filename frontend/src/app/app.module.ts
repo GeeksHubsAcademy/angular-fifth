@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
 import { ProductComponent } from './components/product/product.component';
+import { SearchProductsComponent } from './containers/search-products/search-products.component';
 
 registerLocaleData(es);
 
@@ -26,7 +27,8 @@ registerLocaleData(es);
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    ProductComponent
+    ProductComponent,
+    SearchProductsComponent
   ],
   imports: [
     BrowserModule,

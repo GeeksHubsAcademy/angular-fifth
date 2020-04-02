@@ -17,5 +17,9 @@
     <li nz-menu-item routerLink="register" *ngIf="!user['id']">
       Register
     </li>
+    <form (submit)="searchProducts($event)">
+      <input type="search" name="search" id="">
+      <button type="submit">Buscar</button>
+    </form>
   </ul>
 </header>

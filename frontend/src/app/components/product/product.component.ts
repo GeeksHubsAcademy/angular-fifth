@@ -12,6 +12,6 @@ export class ProductComponent implements  OnChanges {
   constructor() { }
 
   ngOnChanges() {
-    console.log('on changes', this.rate, this.currency);
+    // console.log('on changes', this.product, this.rate, this.currency);
   }
 }

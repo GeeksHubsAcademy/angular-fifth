@@ -7,7 +7,8 @@
         <option value="JPY">JP Yen ¥</option>
         <option value="RUB">Rubblo Ruso Br</option>
     </select>
-    <app-product [product]="product" 
+    <app-product 
+    [product]="product" 
     rate="{{(exchangeRates$ |async)?.rates[currency] || 1}}"
     [currency]="currency"
      *ngFor="let product of (products$ | async)"></app-product>
