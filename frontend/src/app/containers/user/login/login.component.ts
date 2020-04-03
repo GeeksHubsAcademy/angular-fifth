@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, DoCheck } from '@angular/core';
+import { Component, OnInit, ViewChild, DoCheck, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { NzNotificationService } from 'ng-zorro-antd';
@@ -11,7 +11,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, DoCheck {
+export class LoginComponent implements OnInit, DoCheck, AfterViewInit {
   public validateForm: FormGroup;
   constructor(
     private fb: FormBuilder,
@@ -19,19 +19,21 @@ export class LoginComponent implements OnInit, DoCheck {
     private notification: NzNotificationService,
     public router: Router
   ) { }
-    // esto es para evetar el document.getElementById()
-  @ViewChild('usernameInput') pedro;
+  // esto es para evitar el document.getElementById()
+  @ViewChild('usernameInput') public usernameInput: ElementRef;
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
       remember: [true]
     });
-
+  }
+  ngAfterViewInit() {
+    this.usernameInput?.nativeElement.focus();
   }
   ngDoCheck() {
-    // esto es para evetar el document.getElementById()
-    console.log(this.pedro?.nativeElement.value);
+    //   // esto es para evitar el document.getElementById()
+    //   console.log(this.usernameInput?.nativeElement);
   }
   submitForm(): void {
     for (const i in this.validateForm.controls) {

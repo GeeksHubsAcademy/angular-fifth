@@ -5,7 +5,7 @@ import { Component, Input, OnChanges } from '@angular/core';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements  OnChanges {
+export class ProductComponent implements OnChanges {
   @Input() public product: any;
   @Input() public rate: number;
   @Input() public currency: string;

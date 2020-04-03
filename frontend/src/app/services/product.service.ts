@@ -12,8 +12,11 @@ export class ProductService {
   getAll(): Observable<any> {
     return this.httpClient.get('http://localhost:3000/products');
   }
+  getOne(id) {
+    return this.httpClient.get('http://localhost:3000/products/' + id);
+  }
   getExchangeRates(): Observable<any> {
-    return this.httpClient.get('https://api.exchangeratesapi.io/latest')
+    return this.httpClient.get('https://api.exchangeratesapi.io/latest');
   }
   searchProducts(search) {
     return this.httpClient.get('http://localhost:3000/products/name/' + search);

@@ -11,6 +11,17 @@ const ProductController = {
         Product.create({...req.body})
         .then(product=>res.send(product))
     },
+    getOne(req,res){
+        Product.findByPk(req.params.id, {
+            include: [Category]
+        })
+        .then(product => res.send(product))
+        .catch(error=>{
+            console.log(error);
+            res.status(500).send({message: 'Ha surgido un error al intentar tramitar la petición.', error})
+        })
+
+    },
     getOneByName(req,res){
         Product.findAll({//SELECT * FROM products WHERE name LIKE %req.params.name%
             where:{

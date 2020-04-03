@@ -25,7 +25,7 @@ export class SearchProductsComponent implements OnInit {
               this.products = res;
             },
             (error: HttpErrorResponse) => console.log(error)
-          )
+          );
       });
   }
 
