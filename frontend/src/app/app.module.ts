@@ -17,6 +17,7 @@ import es from '@angular/common/locales/es';
 import { ProductComponent } from './components/product/product.component';
 import { SearchProductsComponent } from './containers/search-products/search-products.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ConfirmedComponent } from './containers/user/confirmed/confirmed.component';
 
 registerLocaleData(es);
 
@@ -30,7 +31,8 @@ registerLocaleData(es);
     HomeComponent,
     ProductComponent,
     SearchProductsComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ConfirmedComponent
   ],
   imports: [
     BrowserModule,
