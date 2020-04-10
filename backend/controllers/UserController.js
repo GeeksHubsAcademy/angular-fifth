@@ -22,7 +22,7 @@ const UserController = {
                 to: email,
                 subject: 'Confirme su registro en Armería Funko',
                 html: `
-                <h3>Bienvenido ${user.username} a nuestra Armería de Funkos, estás a un paso de registrarte</h3>
+                <h3>Bienvenido ${req.body.username} a nuestra Armería de Funkos, estás a un paso de registrarte</h3>
                 <a href="${url}">Click aquí para confirmar tu registro</a>
                 Este enlace caduca en 48 horas.
                 `
@@ -47,13 +47,28 @@ const UserController = {
     },
     async confirm(req, res) {
         try {
-            const token = req.params.emailToken;
-            const payload = jwt.verify(token, jwt_secret);
+            const emailToken = req.params.emailToken;
+            const payload = jwt.verify(emailToken, jwt_secret);
             const email = payload.email;
-            const user = await User.update({ 
+             await User.update({ 
                 confirmed: true
             }, { where: { email } });
-            res.send(user);
+           const user= await User.findOne({where:{email}});
+            // Mongoose findOneAndUpdate
+            // const user = await User.findOneAndUpdate({email},{confirmed:true})
+            const authToken = jwt.sign({
+                id: user.id
+            }, jwt_secret);
+            await Token.create({
+                token:authToken,
+                UserId: user.id
+            });
+            /* MongoDB
+            user.tokens.push(authToken);
+            await user.save();
+            */
+            res.redirect('http://localhost:4200/user/confirmado/'+authToken);
+
         } catch (error) {
             console.error(error)
             res.status(500).send({message:'Ha habido un problema al confirmar el usuario',error})
