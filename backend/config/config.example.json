@@ -5,8 +5,12 @@
     "database": "encrypted_login",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": false,
-    "jwt_secret":"ejemplo"
+    "operatorsAliases": 0,
+    "jwt_secret":"ejemplo",
+    "GMAIL": {
+      "user": "bootcampstream@gmail.com",
+      "pass": "123bootcamp123"
+    }
   },
   "test": {
     "username": "root",
@@ -14,8 +18,12 @@
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": false,
-    "jwt_secret":"qweqweqw"
+    "operatorsAliases": 0,
+    "jwt_secret":"qweqweqw",
+    "GMAIL": {
+      "user": "bootcampstream@gmail.com",
+      "pass": "123bootcamp123"
+    }
   },
   "production": {
     "username": "root",
@@ -23,7 +31,11 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": false,
-    "jwt_secret":"qweqweqw"
+    "operatorsAliases": 0,
+    "jwt_secret":"qweqweqw",
+    "GMAIL": {
+      "user": "bootcampstream@gmail.com",
+      "pass": "123bootcamp123"
+    }
   }
 }

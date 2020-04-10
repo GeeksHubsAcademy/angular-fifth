@@ -6,27 +6,57 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const env = process.env.NODE_ENV || 'development';
 const {
-    jwt_secret
+    jwt_secret,
+    API_URL
 } = require('../config/config.json')[env];
+const transporter = require('../config/nodemailer')
 const UserController = {
     async register(req, res) {
         try {
             const password = await bcrypt.hash(req.body.password, 9);
+            const email = req.body.email
+            
+            const emailToken = jwt.sign({ email }, jwt_secret, { expiresIn: '48h' });
+            const url = API_URL + '/users/confirm/' + emailToken;
+            await transporter.sendMail({
+                to: email,
+                subject: 'Confirme su registro en Armería Funko',
+                html: `
+                <h3>Bienvenido ${user.username} a nuestra Armería de Funkos, estás a un paso de registrarte</h3>
+                <a href="${url}">Click aquí para confirmar tu registro</a>
+                Este enlace caduca en 48 horas.
+                `
+            });
             const user = await User.create({
                 username: req.body.username,
-                email: req.body.email,
+                email,
                 password,
+                confirmed: false,
                 role: 'customer'
             });
             res.status(201).send({
                 user,
-                message: 'User creado con éxito'
+                message: 'Te hemos enviado un email para confirmar el registro'
             });
         } catch (error) {
             console.log(error);
             res.status(500).send({
                 message: 'Hubo un problema al tratar de crear el usuario'
             });
+        }
+    },
+    async confirm(req, res) {
+        try {
+            const token = req.params.emailToken;
+            const payload = jwt.verify(token, jwt_secret);
+            const email = payload.email;
+            const user = await User.update({ 
+                confirmed: true
+            }, { where: { email } });
+            res.send(user);
+        } catch (error) {
+            console.error(error)
+            res.status(500).send({message:'Ha habido un problema al confirmar el usuario',error})
         }
     },
     async login(req, res) {
@@ -39,6 +69,11 @@ const UserController = {
             if (!user) {
                 return res.status(400).send({
                     message: 'Usuario o contraseña incorrectas'
+                })
+            }
+            if (!user.confirmed) {
+                return res.status(400).send({
+                    message: 'Debes confirmar tu email'
                 })
             }
             const isMatch = await bcrypt.compare(req.body.password, user.password);
@@ -67,7 +102,7 @@ const UserController = {
             });
         }
     },
-     getInfo(req,res){
+    getInfo(req, res) {
         res.send(req.user);
     }
 }

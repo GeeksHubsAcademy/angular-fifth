@@ -18,10 +18,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(public productService: ProductService, public categoryService: CategoryService) { }
   ngOnInit(): void {
     this.productService.getAll().
-      subscribe(res =>{
-         this.products = res;
-         this.productsFiltered = res;
-        });
+      subscribe(res => {
+        this.products = res;
+        this.productsFiltered = res;
+      });
     this.exchangeRates$ = this.productService.getExchangeRates();
     this.categories$ = this.categoryService.getAll();
   }
