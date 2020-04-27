@@ -1,0 +1,43 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "encrypted_login",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": 0,
+    "jwt_secret": "cByEW6DcbNk4MLjNh9Q",
+    "GMAIL": {
+      "user": "bootcampstream@gmail.com",
+      "pass": "123bootcamp123"
+    },
+    "API_URL":"http://localhost:3000"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": 0,
+    "jwt_secret": "cByEW6DcbNk4MLjNh9Q",
+    "GMAIL": {
+      "user": "bootcampstream@gmail.com",
+      "pass": "123bootcamp123"
+    }
+  },
+  "production": {
+    "username": "sql2336005",
+    "password": "sW7!fQ1%",
+    "database": "sql2336005",
+    "host": "sql2.freemysqlhosting.net",
+    "dialect": "mysql",
+    "operatorsAliases": 0,
+    "jwt_secret": "cByEW6DcbNk4MLjNh9Q",
+    "GMAIL": {
+      "user": "bootcampstream@gmail.com",
+      "pass": "123bootcamp123"
+    },
+    "API_URL":"https://mean-fifth-api.herokuapp.com"
+  }
+}

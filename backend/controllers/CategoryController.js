@@ -1,7 +1,9 @@
-const { Category } = require('../models/index.js')
+const { Category, Product } = require('../models/index.js')
 const CategoryController = {
     getAll(req,res){
-        Category.findAll()
+        Category.findAll({
+            include:[Product]
+        })
         .then(categories=>res.send(categories))
     },
     insert(req,res){

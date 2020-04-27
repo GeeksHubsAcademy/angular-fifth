@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
 
-    return queryInterface.bulkInsert('products', [{
+    return queryInterface.bulkInsert('Products', [{
       "id": 1,
       "name": "AK-47",
       "price": 5500,
